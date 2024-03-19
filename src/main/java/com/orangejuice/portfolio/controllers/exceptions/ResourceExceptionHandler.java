@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.orangejuice.portfolio.services.exceptions.DatabaseException;
+import com.orangejuice.portfolio.services.exceptions.ResourceNotFoundException;
 import com.orangejuice.portfolio.services.exceptions.UnauthorizedException;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -95,15 +97,43 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(status).body(err);
 	}
 	
-	//EntityNotFoundException
-	@ExceptionHandler(EntityNotFoundException.class)
-	public ResponseEntity<StandardError> entityNotFound(EntityNotFoundException e, HttpServletRequest request){
-		HttpStatus status=HttpStatus.UNPROCESSABLE_ENTITY;//422
+//	//EntityNotFoundException
+//	@ExceptionHandler(EntityNotFoundException.class)
+//	public ResponseEntity<StandardError> entityNotFound(EntityNotFoundException e, HttpServletRequest request){
+//		HttpStatus status=HttpStatus.UNPROCESSABLE_ENTITY;//422
+//		
+//		StandardError err=new StandardError();
+//		err.setTimestamp(Instant.now());
+//		err.setStatus(status.value());
+//		err.setError("Entidade não encontrada. Reveja os parâmetros");
+//		err.setMessage(e.getMessage());
+//		err.setPath(request.getRequestURI());
+//		
+//		return ResponseEntity.status(status).body(err);
+//	}
+	
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<StandardError> entityNotFound(ResourceNotFoundException e, HttpServletRequest request){
+		HttpStatus status=HttpStatus.NOT_FOUND;//404
 		
 		StandardError err=new StandardError();
 		err.setTimestamp(Instant.now());
 		err.setStatus(status.value());
-		err.setError("Entidade não encontrada. Reveja os parâmetros");
+		err.setError("Entidade ou recurso solicitado não encontrado.");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		
+		return ResponseEntity.status(status).body(err);
+	}
+	
+	@ExceptionHandler(DatabaseException.class)
+	public ResponseEntity<StandardError> database(DatabaseException e, HttpServletRequest request){
+		HttpStatus status=HttpStatus.BAD_REQUEST;//400
+		
+		StandardError err=new StandardError();
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value());
+		err.setError("Erro de acesso aos dados. Contate o administrador do sistema");
 		err.setMessage(e.getMessage());
 		err.setPath(request.getRequestURI());
 		
