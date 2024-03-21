@@ -112,7 +112,7 @@ public class ProjectDTO implements  Serializable{
 		if(vetor != null && vetor.length > 0) {
 			
 			for (String item : vetor) {
-				this.tags.add(item);
+				this.tags.add(item.trim());
 			}
 		}		
 	}

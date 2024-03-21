@@ -34,31 +34,38 @@ public class User implements UserDetails, Serializable{// UserDetails,
 	
 	private String name;	
 	
+	private String surname;
+	
 	private String email;//é o login, propriamente dito
 	
-	private String password;
+	private String password;	
 	
 	@Column(name = "user_role",columnDefinition = "integer")	
 	private EnumRole user_role;
 
+	private String img_profile;
 	
 	public User() {
 		
 	}
 
-	public User(Long id, String name, String email, String password, EnumRole user_role) {		
+	public User(Long id,String name, String surname, String email, String password, EnumRole user_role, String img_profile) {		
 		this.id = id;
 		this.name = name;
+		this.surname = surname;
 		this.email = email;
 		this.password = password;
 		this.user_role = user_role;
+		this.img_profile = img_profile;
 	}
 	
-	public User(String name, String email, String password, EnumRole user_role) {	
+	public User(String name, String surname, String email, String password, EnumRole user_role, String img_profile) {	
 		this.name = name;
+		this.surname = surname;
 		this.email = email;
 		this.password = password;
 		this.user_role = user_role;
+		this.img_profile = img_profile;
 	}
 
 	public Long getId() {
@@ -100,6 +107,24 @@ public class User implements UserDetails, Serializable{// UserDetails,
 
 	public void setUserRole(EnumRole user_role) {
 		this.user_role = user_role;
+	}
+	
+	
+
+	public String getSurname() {
+		return surname;
+	}
+
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
+
+	public String getImg_profile() {
+		return img_profile;
+	}
+
+	public void setImg_profile(String img_profile) {
+		this.img_profile = img_profile;
 	}
 
 	@Override

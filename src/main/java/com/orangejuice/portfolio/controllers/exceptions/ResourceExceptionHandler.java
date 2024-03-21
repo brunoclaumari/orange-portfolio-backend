@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.orangejuice.portfolio.services.exceptions.DatabaseException;
+import com.orangejuice.portfolio.services.exceptions.MyValidationException;
 import com.orangejuice.portfolio.services.exceptions.ResourceNotFoundException;
 import com.orangejuice.portfolio.services.exceptions.UnauthorizedException;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 
 
@@ -79,9 +79,7 @@ public class ResourceExceptionHandler {
 		err.setPath(request.getRequestURI());
 		
 		return ResponseEntity.status(status).body(err);
-	}
-	
-	//ApplicationContextException
+	}	
 	
 	@ExceptionHandler(ApplicationContextException.class)
 	public ResponseEntity<StandardError> databaseOut(ApplicationContextException e, HttpServletRequest request){
@@ -140,6 +138,20 @@ public class ResourceExceptionHandler {
 		return ResponseEntity.status(status).body(err);
 	}
 	
+	//MyValidationException
+	@ExceptionHandler(MyValidationException.class)
+	public ResponseEntity<StandardError> validation(MyValidationException e, HttpServletRequest request){
+		HttpStatus status=HttpStatus.UNPROCESSABLE_ENTITY;//422
+		
+		StandardError err=new StandardError();
+		err.setTimestamp(Instant.now());
+		err.setStatus(status.value());
+		err.setError("Email repetido");
+		err.setMessage(e.getMessage());
+		err.setPath(request.getRequestURI());
+		
+		return ResponseEntity.status(status).body(err);
+	}
 
 	
 }
