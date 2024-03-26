@@ -69,7 +69,7 @@ public class ProjectService {
 	@Transactional
 	public ProjectDTO update(Long id, Project body) {
 		
-		ProjectDTO dto = new ProjectDTO();
+		
 		try {
 			Project entity = repository.getReferenceById(id);
 			if(entity != null) {

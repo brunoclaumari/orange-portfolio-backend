@@ -59,15 +59,14 @@ public class SecurityConfigurations {
 				.cors(cors -> cors.configurationSource(corsConfigurationSource()))
 				.csrf(csrf -> {
 					csrf
-					.ignoringRequestMatchers(toH2Console())
-					//.ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**"))
+					//.ignoringRequestMatchers(toH2Console())					
 					.disable();
 				})
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))				
 				.authorizeHttpRequests(auth->{
 					auth
 					.requestMatchers("/favicon.ico").permitAll()		
-					.requestMatchers(toH2Console()).permitAll()
+					//.requestMatchers(toH2Console()).permitAll()
 					.requestMatchers(HttpMethod.POST,"/myauth/login").permitAll()
 					.requestMatchers(HttpMethod.POST,"/myauth/register").permitAll()
 					.requestMatchers(HttpMethod.GET,"/projects/**").permitAll()

@@ -1,7 +1,5 @@
 package com.orangejuice.portfolio.entities;
 
-
-
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -32,7 +30,7 @@ public class User implements UserDetails, Serializable{// UserDetails,
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;	
 	
-	private String name;	
+	private String first_name;	
 	
 	private String surname;
 	
@@ -49,9 +47,9 @@ public class User implements UserDetails, Serializable{// UserDetails,
 		
 	}
 
-	public User(Long id,String name, String surname, String email, String password, EnumRole user_role, String img_profile) {		
+	public User(Long id,String first_name, String surname, String email, String password, EnumRole user_role, String img_profile) {		
 		this.id = id;
-		this.name = name;
+		this.first_name = first_name;
 		this.surname = surname;
 		this.email = email;
 		this.password = password;
@@ -59,8 +57,8 @@ public class User implements UserDetails, Serializable{// UserDetails,
 		this.img_profile = img_profile;
 	}
 	
-	public User(String name, String surname, String email, String password, EnumRole user_role, String img_profile) {	
-		this.name = name;
+	public User(String first_name, String surname, String email, String password, EnumRole user_role, String img_profile) {	
+		this.first_name = first_name;
 		this.surname = surname;
 		this.email = email;
 		this.password = password;
@@ -75,14 +73,15 @@ public class User implements UserDetails, Serializable{// UserDetails,
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public String getName() {
-		return name;
+	
+	public String getFirst_name() {
+		return first_name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
 	}
+
 
 	public String getEmail() {
 		return email;
@@ -107,8 +106,7 @@ public class User implements UserDetails, Serializable{// UserDetails,
 
 	public void setUserRole(EnumRole user_role) {
 		this.user_role = user_role;
-	}
-	
+	}	
 	
 
 	public String getSurname() {
@@ -199,7 +197,6 @@ public class User implements UserDetails, Serializable{// UserDetails,
 		// TODO Auto-generated method stub
 		return true;
 	}
-	
 	
 	
 

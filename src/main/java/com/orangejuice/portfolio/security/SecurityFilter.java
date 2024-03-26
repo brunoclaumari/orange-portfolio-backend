@@ -3,11 +3,9 @@ package com.orangejuice.portfolio.security;
 
 
 import java.io.IOException;
-import java.time.Instant;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -38,7 +36,7 @@ public class SecurityFilter extends OncePerRequestFilter {
 
 		try {
 			
-			var uri = request.getRequestURI();
+			
 			String token = this.recoverToken(request);
 			if(token != null) {
 				String login = tokenService.validateJwtToken(token);

@@ -5,7 +5,7 @@ import com.orangejuice.portfolio.enums.EnumRole;
 
 
 public record RegisterDTO(
-		String name, 
+		String first_name, 
 		String surname,
 		String img_profile,
 		String email, 

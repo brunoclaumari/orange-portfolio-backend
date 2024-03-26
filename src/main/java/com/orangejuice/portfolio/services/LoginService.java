@@ -30,12 +30,12 @@ public class LoginService {
 		
 		String encriptedPass = new BCryptPasswordEncoder().encode(data.password());
 		//EnumRole role = EnumRole.valueOf(data.user_role());
-		newUser = new User(data.name(),data.surname(), data.email(), encriptedPass, data.user_role(), data.img_profile());
+		newUser = new User(data.first_name(),data.surname(), data.email(), encriptedPass, data.user_role(), data.img_profile());
 		
 		this.userRepository.save(newUser);
 		
 		return new UserResponseDTO(
-				newUser.getName(), 
+				newUser.getFirst_name(), 
 				newUser.getSurname(),
 				newUser.getEmail(), 
 				newUser.getUserRole().getRole(), 
